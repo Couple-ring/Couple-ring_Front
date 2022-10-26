@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import { MainColor, PointColor } from "../../style/color";
-import Header from "../Header";
+import { MainColor, PointColor } from "../../style";
+import { AuthType } from "../../inteface";
 
-const LoginInputs = () => {
-  const Text = [
-    { title: "로그인" },
+function LoginInputs(): JSX.Element {
+  const Text: AuthType[] = [
+    { title: "로그인", type: "text" },
     { title: "비밀번호", type: "password" },
-  ]
-  return(
+  ];
+
+  return (
     <Inputs>
       {Text.map((list) => (
         <LoginInput>
@@ -19,16 +20,13 @@ const LoginInputs = () => {
   );
 };
 
-function Login() {
+function Login(): JSX.Element {
   return (
-    <>
-      <Header/>
-      <Container>
-        <Head>로그인</Head>
-        <LoginInputs/>
-        <LoginBtn>로그인하기</LoginBtn>
-      </Container>
-    </>
+    <Container>
+      <Head>로그인</Head>
+      <LoginInputs />
+      <LoginBtn>로그인하기</LoginBtn>
+    </Container>
   );
 };
 

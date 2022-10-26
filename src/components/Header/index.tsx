@@ -1,20 +1,22 @@
 import styled from "styled-components";
-import { PointColor } from "../../style/color";
-import { CoupleringLogo, Profile, List, Door } from "../../assets";
+import { PointColor } from "../../style";
+import { CoupleringLogo, Profile, List, Door, ClickProfile } from "../../assets";
 import { getAccessToken } from "../../utils/getAccessToken";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Btns = () => {
-  const accessToken = getAccessToken();
-  const [isClickProfile, setIsClickProfile] = useState(false);
-  
+function Btns(): JSX.Element {
+  const accessToken: string | null = getAccessToken();
+  const [isClickProfile, setIsClickProfile] = useState<boolean>(false);
+
   return (
     <>
       {!accessToken ?
         (
           <Btn>
-            <img onClick={()=>{}} src={Profile} />
+            <img
+              onClick={() => setIsClickProfile(!isClickProfile)}
+              src={isClickProfile ? ClickProfile : Profile} />
             <img src={List} />
             <img src={Door} />
           </Btn>
@@ -34,7 +36,7 @@ const Btns = () => {
   );
 };
 
-function Header() {
+function Header(): JSX.Element {
   return (
     <Container>
       <Link to="main">
@@ -43,8 +45,7 @@ function Header() {
       <Btns />
     </Container >
   )
-}
-
+};
 const Container = styled.div`
   width: 100vw;
   height: 64px;
