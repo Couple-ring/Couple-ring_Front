@@ -1,6 +1,6 @@
 import Login from "../components/Login";
 
-function LoginPage() {
+function LoginPage(): JSX.Element {
   return <Login />;
 };
 

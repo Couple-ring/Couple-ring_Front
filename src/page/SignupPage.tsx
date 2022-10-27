@@ -1,7 +1,7 @@
 import Signup from '../components/Signup';
 
-function SignupPage() {
-  return <Signup/>;
-}
+function SignupPage(): JSX.Element {
+  return <Signup />;
+};
 
-export default SignupPage
+export default SignupPage;
