@@ -77,11 +77,11 @@ const Input = styled.input`
   background: ${MainColor};
   border-radius: 12px;
   font-size: 20px;
-  color: ${PointColor};
+  color: white;
   padding: 0 10px;
+  font-weight: 600;
   :focus{
     background: ${PointColor};
-    color: white;
   }
 `;
 const LoginBtn = styled.button`
