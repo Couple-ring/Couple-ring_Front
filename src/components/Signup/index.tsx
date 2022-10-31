@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { MainColor, PointColor } from "../../style";
 import { AuthType } from "../../inteface";
+import { useState } from "react";
 
 function SignupInputs(): JSX.Element {
   const Text: AuthType[] = [
@@ -10,7 +11,7 @@ function SignupInputs(): JSX.Element {
     { title: "비밀번호 확인", type: "password" },
     { title: "연애를 시작한 날짜", type: "date" },
   ];
-  
+
   return (
     <Inputs>
       {Text.map((list) => (
@@ -23,13 +24,18 @@ function SignupInputs(): JSX.Element {
   );
 };
 
-function CheckModal(): JSX.Element {
+function CheckModal({ setInfo, setSignupCheck }: { setInfo: any, setSignupCheck: any }): JSX.Element {
+  const GoCoupleInfo = () => {
+    setInfo(true);
+    setSignupCheck(false);
+  }
+  
   return (
     <Background>
       <Box>
         <>당신의 애인이 커플링에 가입하였나요?</>
         <Btns>
-          <Btn>예</Btn>
+          <Btn onClick={GoCoupleInfo}>예</Btn>
           <Btn>아니요</Btn>
         </Btns>
       </Box>
@@ -37,13 +43,39 @@ function CheckModal(): JSX.Element {
   );
 };
 
-function Signup(): JSX.Element {
+function CoupleInfo(): JSX.Element {
+  return (
+    <Wrapper>
+      <Head>회원가입</Head>
+      <Inputs>
+        <SignupInput>
+          <Title>연인 아이디</Title>
+          <Input />
+        </SignupInput>
+      </Inputs>
+      <SignupBtn>완료</SignupBtn>
+    </Wrapper>
+  );
+};
+
+function MyInfo({ setSignupCheck }: { setSignupCheck: any }): JSX.Element {
   return (
     <Container>
       <Head>회원가입</Head>
       <SignupInputs />
-      <SignupBtn>가입하기</SignupBtn>
+      <SignupBtn onClick={() => (setSignupCheck(true))}>가입하기</SignupBtn>
     </Container>
+  );
+};
+
+function Signup(): JSX.Element {
+  const [Info, setInfo] = useState<boolean>(false);
+  const [signupCheck, setSignupCheck] = useState<boolean>(false);
+  return (
+    <>
+      {Info ? <CoupleInfo /> : <MyInfo setSignupCheck={setSignupCheck} />}
+      {signupCheck && <CheckModal setInfo={setInfo} setSignupCheck={setSignupCheck} />}
+    </>
   );
 };
 
@@ -51,7 +83,7 @@ const Container = styled.div`
   width: 548px;
   height: 760px;
   background: #FFFFFF;
-  border-radius: 20px; 
+  border-radius: 20px;
   position: absolute;
   top: 54%;
   left: 50%;
@@ -72,9 +104,9 @@ const Head = styled.span`
 const Inputs = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 34px;
-  margin-top: 20px;
   gap: 17px;
+  margin-left: 34px;
+  margin-top: 30px;
 `;
 const SignupInput = styled.div`
   display: flex;
@@ -159,6 +191,16 @@ const Btn = styled.button`
   :hover{
     background: ${MainColor};
   }
+`;
+const Wrapper = styled.div`
+  background: #FFFFFF;
+  border-radius: 20px;
+  position: absolute;
+  width: 548px;
+  height: 331px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export default Signup;
