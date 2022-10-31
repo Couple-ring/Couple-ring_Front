@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Font, MainColor, PointColor } from "../../style";
+import { MainColor, PointColor } from "../../style";
 import { AuthType } from "../../inteface";
 
 function SignupInputs(): JSX.Element {
@@ -10,7 +10,7 @@ function SignupInputs(): JSX.Element {
     { title: "비밀번호 확인", type: "password" },
     { title: "연애를 시작한 날짜", type: "date" },
   ];
-
+  
   return (
     <Inputs>
       {Text.map((list) => (
@@ -20,6 +20,20 @@ function SignupInputs(): JSX.Element {
         </SignupInput>
       ))}
     </Inputs>
+  );
+};
+
+function CheckModal(): JSX.Element {
+  return (
+    <Background>
+      <Box>
+        <>당신의 애인이 커플링에 가입하였나요?</>
+        <Btns>
+          <Btn>예</Btn>
+          <Btn>아니요</Btn>
+        </Btns>
+      </Box>
+    </Background>
   );
 };
 
@@ -100,6 +114,50 @@ const SignupBtn = styled.button`
   margin-top: 35px;
   :hover{
     background: ${PointColor};
+  }
+`;
+const Background = styled.div`
+  width: 100vw;
+  height: calc(100vh - 64px);
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 3;
+`;
+const Box = styled.div`
+  width: 483px;
+  height: 247px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-size: 27px;
+  color: ${PointColor};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+`;
+const Btns = styled.div`
+  display: flex;
+  gap: 50px;
+`;
+const Btn = styled.button`
+  background: ${PointColor};
+  border-radius: 12px;
+  height: 48px;
+  width: 174px;
+  left: 760px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 27px;
+  :hover{
+    background: ${MainColor};
   }
 `;
 
