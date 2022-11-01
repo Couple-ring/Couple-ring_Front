@@ -24,11 +24,11 @@ function SignupInputs(): JSX.Element {
   );
 };
 
-function CheckModal({ setInfo, setSignupCheck }: { setInfo: any, setSignupCheck: any }): JSX.Element {
+function CheckModal({ setInfo, setSignupCheck }: { setInfo: React.Dispatch<React.SetStateAction<boolean>>, setSignupCheck: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element {
   const GoCoupleInfo = () => {
     setInfo(true);
     setSignupCheck(false);
-  }
+  };
   
   return (
     <Background>
@@ -58,7 +58,7 @@ function CoupleInfo(): JSX.Element {
   );
 };
 
-function MyInfo({ setSignupCheck }: { setSignupCheck: any }): JSX.Element {
+function MyInfo({ setSignupCheck }: { setSignupCheck: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element {
   return (
     <Container>
       <Head>회원가입</Head>
