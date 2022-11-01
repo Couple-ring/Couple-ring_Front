@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { MainColor, PointColor } from "../../style";
 import { COLOR } from "../../style";
 import { ReviseIcon, Test, Sad, Happy, Angry, Soso } from "../../assets";
-import { DiaryType } from "../../inteface";
+import { DiaryType } from "../../interface";
 import { useState } from "react";
 
 function Main(): JSX.Element {

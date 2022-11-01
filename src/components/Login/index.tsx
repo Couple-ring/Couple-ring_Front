@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { MainColor, PointColor } from "../../style";
-import { AuthType } from "../../inteface";
+import { AuthType } from "../../interface";
 
 function LoginInputs(): JSX.Element {
   const Text: AuthType[] = [
