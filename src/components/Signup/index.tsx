@@ -85,5 +85,4 @@ const Btn = styled.button`
   }
 `;
 
-
 export default Signup;
