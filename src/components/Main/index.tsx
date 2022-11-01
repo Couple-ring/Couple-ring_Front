@@ -62,9 +62,7 @@ function WriteDiary({ Diary }: { Diary: DiaryType }): JSX.Element {
     <Box>
       <DiaryHead>
         <span>{Diary.name}</span>
-        <Mood>
-          <img src={Diary.mood} />
-        </Mood>
+        <img src={Diary.mood} />
         {Diary.mine && <img src={ReviseIcon} />}
       </DiaryHead>
       <Content>
