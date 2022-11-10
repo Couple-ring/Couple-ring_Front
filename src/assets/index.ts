@@ -10,3 +10,4 @@ export { default as Happy } from "./imgs/happy.svg";
 export { default as Soso } from "./imgs/soso.svg";
 export { default as Sad } from "./imgs/sad.svg";
 export { default as Test } from "./imgs/test.png";
+export { default as ImgIcon } from "./imgs/imgicon.svg";
