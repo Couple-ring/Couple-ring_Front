@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { PointColor, COLOR } from "../../style";
 import { CoupleringLogo, Profile, List, Door, ClickProfile, ReviseIcon, Heart } from "../../assets";
-import { getAccessToken } from "../../utils/getAccessToken";
+import { getAccessToken } from "../../utils/Token";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
