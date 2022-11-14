@@ -4,6 +4,7 @@ import { COLOR } from "../../style";
 import { ReviseIcon, Test, Sad, Happy, Angry, Soso } from "../../assets";
 import { DiaryType } from "../../interface";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Main(): JSX.Element {
   const [isSignup, setIsSignup] = useState<boolean>(false);
@@ -57,15 +58,22 @@ function NoSignup(): JSX.Element {
 
 function WriteDiary({ Diary }: { Diary: DiaryType }): JSX.Element {
   const previewText: string = Diary.content.length < 100 ? Diary.content : Diary.content.substring(0, 80) + " ...";
+  const navigate = useNavigate();
 
   return (
     <Box>
       <DiaryHead>
         <span>{Diary.name}</span>
         <img src={Diary.mood} />
-        {Diary.mine && <img src={ReviseIcon} />}
+        {
+          Diary.mine &&
+          <img
+            src={ReviseIcon}
+            onClick={() => navigate("/revise_diary")}
+          />
+        }
       </DiaryHead>
-      <Content>
+      <Content onClick={() => navigate("/watch_diary")}>
         <Title>{Diary.title}</Title>
         <Post>{previewText}</Post>
         <Title>오늘의 이미지</Title>
