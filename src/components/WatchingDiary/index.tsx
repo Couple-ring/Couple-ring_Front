@@ -61,17 +61,26 @@ const Wrapper = styled.div`
   margin-top: 30px;
 `;
 const Title = styled.div`
-  width: 700px;
+  width: 670px;
   height: 64px;
   background: #FFFFFF;
   border-radius: 12px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  color: ${PointColor};
+  font-weight: 600;
 `;
 const Content = styled.div`
-  width: 700px;
-  height: 600px;
+  width: 660px;
+  height: 560px;
   background: white;
   border-radius: 12px;
   position: relative;
+  padding: 20px;
+  font-size: 24px;
+  color: ${PointColor};
 `;
 const ImgBtn = styled.button`
   width: 183px;
