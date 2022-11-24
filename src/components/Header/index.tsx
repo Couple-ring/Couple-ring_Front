@@ -5,34 +5,50 @@ import { getAccessToken } from "../../utils/Token";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function MyPgModal({ name, id }: { name: string, id: string }): JSX.Element {
+function Header(): JSX.Element {
   return (
-    <Box>
-      <BoxHead>
-        <>ME</>
-        <img src={ReviseIcon} />
-      </BoxHead>
-      <Information>
-        <MyAccount>
-          <Me>
-            <MyName>{name}</MyName>
-            <MyId>{id}</MyId>
-          </Me>
-          <DeleteBtn>탈퇴</DeleteBtn>
-        </MyAccount>
-        <DateInfo>
-          <DateWrapper>
-            <Title>우리의 시작</Title>
-            <Date>2022.06.16</Date>
-          </DateWrapper>
-          <img src={Heart} />
-          <DateWrapper>
-            <Title>사랑한지</Title>
-            <Date>116일째</Date>
-          </DateWrapper>
-        </DateInfo>
-      </Information>
-    </Box>
+    <Container>
+      <Link to="main">
+        <img src={CoupleringLogo} />
+      </Link>
+      <Btns />
+    </Container >
+  );
+};
+
+function MyPgModal({ name, id }: { name: string, id: string }): JSX.Element {
+  const [isDelete, setIsDelete] = useState<boolean>(false);
+
+  return (
+    <>
+      <Box>
+        <BoxHead>
+          <>ME</>
+          <img src={ReviseIcon} />
+        </BoxHead>
+        <Information>
+          <MyAccount>
+            <Me>
+              <MyName>{name}</MyName>
+              <MyId>{id}</MyId>
+            </Me>
+            <DeleteBtn onClick={() => setIsDelete(true)}>탈퇴</DeleteBtn>
+          </MyAccount>
+          <DateInfo>
+            <DateWrapper>
+              <Title>우리의 시작</Title>
+              <Date>2022.06.16</Date>
+            </DateWrapper>
+            <img src={Heart} />
+            <DateWrapper>
+              <Title>사랑한지</Title>
+              <Date>116일째</Date>
+            </DateWrapper>
+          </DateInfo>
+        </Information>
+      </Box>
+      {isDelete && <DeleteAccountMd />}
+    </>
   );
 };
 
@@ -42,7 +58,7 @@ function Btns(): JSX.Element {
 
   return (
     <>
-      {accessToken ?
+      {!accessToken ?
         (
           <Btn>
             <img
@@ -70,19 +86,22 @@ function Btns(): JSX.Element {
   );
 };
 
-function Header(): JSX.Element {
+function DeleteAccountMd(): JSX.Element {
   return (
-    <>
-      <Container>
-        <Link to="main">
-          <img src={CoupleringLogo} />
-        </Link>
-        <Btns />
-      </Container >
-    </>
-  )
+    <Background>
+      <AccountBox>
+
+      </AccountBox>
+    </Background>
+  );
 };
 
+const Background = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+`;
 const Container = styled.div`
   width: 100vw;
   height: 64px;
@@ -195,5 +214,11 @@ const Date = styled.span`
   font-weight: 600;
   font-size: 24px;
 `;
-
+const AccountBox = styled.div`
+  width: 538px;
+  height: 221px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  background: #FFFFFF;
+`;
 export default Header;
