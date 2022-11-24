@@ -11,3 +11,5 @@ export { default as Soso } from "./imgs/soso.svg";
 export { default as Sad } from "./imgs/sad.svg";
 export { default as Test } from "./imgs/test.png";
 export { default as ImgIcon } from "./imgs/imgicon.svg";
+export { default as SearchIcon } from "./imgs/searchicon.svg";
+export {default as ClickSearchIcon} from "./imgs/clickSearchIcon.svg";
