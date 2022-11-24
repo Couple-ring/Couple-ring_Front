@@ -5,6 +5,7 @@ import Header from './components/Header';
 import MainPage from './page/MainPage';
 import WatchingDiaryPage from './page/WatchingDiaryPage';
 import ReviseDiaryPage from './page/ReviseDiaryPage';
+import HistoryPage from './page/HistoryPage';
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
         <Route path='/main' element={<MainPage />} />
         <Route path='/watch_diary' element={<WatchingDiaryPage />} />
         <Route path='/revise_diary' element={<ReviseDiaryPage />} />
+        <Route path='/history' element={<HistoryPage />} />
       </Routes>
     </BrowserRouter>
   )
