@@ -53,8 +53,8 @@ const MyInfo = ({ setSignupCheck }: MyInfoProps) => {
         localStorage.setItem('myId', id);
         setSignupCheck(true);
       }
-      catch (error) {
-        console.log(error);
+      catch (error: any) {
+        if (error.response.data.status === 400) alert("존재하는 아이디입니다.");
       };
     }
     else {
