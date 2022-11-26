@@ -1,37 +1,7 @@
-import { AuthType } from "../../interface";
 import styled from "styled-components";
-import { MainColor, PointColor } from "../../style";
+import { MainColor, PointColor } from "../../../style";
 
-interface MyInfoProps {
-  setSignupCheck: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function MyInfo({ setSignupCheck }: MyInfoProps): JSX.Element {
-  const Text: AuthType[] = [
-    { title: "이름", type: "text" },
-    { title: "아이디", type: "text" },
-    { title: "비밀번호", type: "password" },
-    { title: "비밀번호 확인", type: "password" },
-    { title: "연애를 시작한 날짜", type: "date" },
-  ];
-
-  return (
-    <Container>
-      <Head>회원가입</Head>
-      <Inputs>
-        {Text.map((list) => (
-          <SignupInput>
-            <Title>{list.title}</Title>
-            <Input type={list.type} />
-          </SignupInput>
-        ))}
-      </Inputs>
-      <SignupBtn onClick={() => (setSignupCheck(true))}>가입하기</SignupBtn>
-    </Container>
-  );
-};
-
-const Container = styled.div`
+export const Container = styled.div`
   width: 548px;
   height: 760px;
   background: #FFFFFF;
@@ -41,7 +11,7 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-const Head = styled.span`
+export const Head = styled.span`
   width: calc(inherit - 34px);
   height: 77px;
   background: ${PointColor};
@@ -53,24 +23,24 @@ const Head = styled.span`
   font-size: 32px;
   color: white;
 `;
-const Inputs = styled.div`
+export const Inputs = styled.div`
   display: flex;
   flex-direction: column;
   gap: 17px;
   margin-left: 34px;
   margin-top: 30px;
 `;
-const SignupInput = styled.div`
+export const SignupInput = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
 `;
-const Title = styled.span`
+export const Title = styled.span`
   font-weight: 600;
   font-size: 22px;
   color: ${PointColor};
 `;
-const Input = styled.input`
+export const Input = styled.input`
   width: 452px;
   height: 44px;
   border: none;
@@ -85,7 +55,7 @@ const Input = styled.input`
     background: ${PointColor};
   }
 `;
-const SignupBtn = styled.button`
+export const SignupBtn = styled.button`
   width: 236px;
   height: 56px;
   color: white;
@@ -100,5 +70,3 @@ const SignupBtn = styled.button`
     background: ${PointColor};
   }
 `;
-
-export default MyInfo;
