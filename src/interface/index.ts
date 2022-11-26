@@ -1,6 +1,7 @@
 export interface AuthType {
   title: string;
   type: string;
+  name: string;
 };
 
 export interface DiaryType {
