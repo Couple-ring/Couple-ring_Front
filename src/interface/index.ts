@@ -5,10 +5,11 @@ export interface AuthType {
 };
 
 export interface DiaryType {
-  name: string;
-  mood: string;
-  title: string;
-  content: string;
-  img: string;
-  mine: boolean;
+  content: string,
+  date: string,
+  feel: string,
+  id: number,
+  imageUrl: null | string,
+  name: string,
+  title: string
 };
