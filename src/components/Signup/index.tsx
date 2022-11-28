@@ -1,5 +1,6 @@
 import * as S from './styles';
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import CoupleInfo from "./CoupleInfo";
 import MyInfo from "./MyInfo";
 
@@ -21,9 +22,16 @@ interface CheckModalProps {
 };
 
 const CheckModal = ({ setInfo, setSignupCheck }: CheckModalProps) => {
-  const GoCoupleInfo = () => {
+  const navigate = useNavigate();
+
+  const goCoupleInfo = () => {
     setInfo(true);
     setSignupCheck(false);
+  };
+
+  const goLogin = () => {
+    alert("로그인을 진행해주세요.");
+    navigate("/main");
   };
 
   return (
@@ -31,8 +39,8 @@ const CheckModal = ({ setInfo, setSignupCheck }: CheckModalProps) => {
       <S.Box>
         <>당신의 애인이 커플링에 가입하였나요?</>
         <S.Btns>
-          <S.Btn onClick={GoCoupleInfo}>예</S.Btn>
-          <S.Btn>아니요</S.Btn>
+          <S.Btn onClick={goCoupleInfo}>예</S.Btn>
+          <S.Btn onClick={goLogin}>아니요</S.Btn>
         </S.Btns>
       </S.Box>
     </S.Background>
