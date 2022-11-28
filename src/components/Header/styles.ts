@@ -3,8 +3,9 @@ import { COLOR, PointColor } from "../../style";
 
 export const Background = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: calc( 100vh - 64px);
   background: rgba(255, 255, 255, 0.5);
+  z-index: 99;
   position: absolute;
 `;
 export const Container = styled.div`
@@ -125,4 +126,43 @@ export const AccountBox = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   background: #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+export const AccountBoxHead = styled.div`
+  width: inherit;
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 32px;
+  color: white;
+  background: ${COLOR.red};
+  border-radius: 20px 20px 0px 0px;
+`;
+export const AccountBoxBtns = styled.div`
+  display: flex;
+  gap: 54px;
+  width: inherit;
+  height: 145px;
+  align-items: center;
+  justify-content: center;
+`;
+export const AccountBoxBtn = styled.div`
+  width: 156px;
+  height: 74px;
+  border-radius: 12px;
+  background: ${COLOR.pink};
+  :hover{
+    background: ${COLOR.red};
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 32px;
+  color: white;
 `;
