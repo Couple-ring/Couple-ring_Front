@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MainColor, PointColor } from "../../style";
+import { MainColor, PointColor, Font } from "../../style";
 
 export const Container = styled.div`
   position: absolute;
@@ -30,6 +30,14 @@ export const Wrapper = styled.div`
   gap: 20px;
   align-items: center;
   margin-top: 30px;
+  >img{
+    width: 273px;
+    height: 273px;
+    border-radius: 12px;
+    position: absolute;
+    top: 420px;
+    left: 50px;
+  }
 `;
 export const Title = styled.input`
   width: 670px;
@@ -56,6 +64,7 @@ export const Content = styled.textarea`
   border: none;
   outline: none;
   font-weight: 600;
+  font-family: ${Font};
 `;
 export const ImgBtn = styled.button`
   width: 230px;
@@ -86,7 +95,7 @@ export const ReviseBtn = styled.button`
 export const Box = styled.div`
   width: 385px;
   height: 303px;
-  background: ${PointColor};
+  background: ${MainColor};
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -100,9 +109,12 @@ export const Box = styled.div`
 export const ImgBox = styled.div`
   width: 339px;
   height: 60px;
-  background: ${MainColor};
+  background: white;
   border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+  >img{
+    height: 35px;
+  }
 `;
