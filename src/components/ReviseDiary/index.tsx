@@ -20,8 +20,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const ReviseDiary = () => {
   const fileInput = useRef<any>(null);
+  // 사용하지 않는 코드는 제거 필요1
   const { id } = useParams();
   const [isMood, setIsMood] = useState<boolean>(false);
+  // 임시로 state 작성해두었고, 해당 state name & 사용 방법 수정 필요
   const [a, setA] = useState<any>(Test);
   const [myDiary, setMyDiary] = useState<any>([]);
   const [mood, setMood] = useState<string>(Soso);
@@ -38,6 +40,7 @@ const ReviseDiary = () => {
     content: "",
   });
 
+  // 사용하지 않는 코드는 제거 필요2
   const { title, content } = reviseDiary;
 
   const getMyDiary = async () => {
