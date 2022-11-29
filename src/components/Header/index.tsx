@@ -142,8 +142,9 @@ const DeleteAccountModal = ({ setIsDelete }: { setIsDelete: React.Dispatch<React
       }
     ).then(() => {
       localStorage.removeItem('couple_ring_access_token');
-      alert("탈퇴가 완료되었습니다.");
+      setIsDelete(false);
       navigate('/login');
+      alert("탈퇴가 완료되었습니다.");
     });
   };
 

@@ -77,11 +77,24 @@ const WriteDiary = ({ Diary }: { Diary: any }) => {
   // const previewText: string = Diary.content.length < 80 ? Diary.content : Diary.content.substring(0, 80) + " ...";
   const navigate = useNavigate();
 
+  const Mood = () => {
+    switch (Diary.feel) {
+      case "Happy":
+        return Happy;
+      case "Sad":
+        return Sad;
+      case "Soso":
+        return Soso;
+      case "Angry":
+        return Angry;
+    };
+  };
+
   return (
     <S.Box>
       <S.DiaryHead>
         <span>{Diary.name}</span>
-        <img src={Diary.feel} />
+        <img src={Mood()} />
       </S.DiaryHead>
       <S.Content onClick={() => navigate(`/revise_diary/${Diary.id}`)}>
         <S.Title>{Diary.title}</S.Title>
