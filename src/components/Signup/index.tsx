@@ -1,6 +1,6 @@
-import * as S from './styles';
+import * as S from "./styles";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import CoupleInfo from "./CoupleInfo";
 import MyInfo from "./MyInfo";
 
@@ -11,7 +11,9 @@ const Signup = () => {
   return (
     <>
       {Info ? <CoupleInfo /> : <MyInfo setSignupCheck={setSignupCheck} />}
-      {signupCheck && <CheckModal setInfo={setInfo} setSignupCheck={setSignupCheck} />}
+      {signupCheck && (
+        <CheckModal setInfo={setInfo} setSignupCheck={setSignupCheck} />
+      )}
     </>
   );
 };
@@ -19,7 +21,7 @@ const Signup = () => {
 interface CheckModalProps {
   setInfo: React.Dispatch<React.SetStateAction<boolean>>;
   setSignupCheck: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 const CheckModal = ({ setInfo, setSignupCheck }: CheckModalProps) => {
   const navigate = useNavigate();

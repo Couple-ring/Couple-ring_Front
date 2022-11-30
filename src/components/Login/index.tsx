@@ -9,13 +9,13 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const Login = () => {
   const navigate = useNavigate();
   const Text: AuthType[] = [
-    { title: "아이디", type: "text", name: 'id' },
+    { title: "아이디", type: "text", name: "id" },
     { title: "비밀번호", type: "password", name: "password" },
   ];
 
   const [inputs, setInputs] = useState({
-    id: '',
-    password: '',
+    id: "",
+    password: "",
   });
   const { id, password } = inputs;
 
@@ -28,26 +28,26 @@ const Login = () => {
   };
 
   const login = async () => {
-    await axios.post(`${BASE_URL}/auth/login`,
-      {
+    await axios
+      .post(`${BASE_URL}/auth/login`, {
         accountId: id,
         password: password,
-      }
-    ).then((res) => {
-      localStorage.setItem('couple_ring_access_token', res.data.accessToken);
-      localStorage.setItem('refresh_token', res.data.refreshToken);
-    });
+      })
+      .then((res) => {
+        localStorage.setItem("couple_ring_access_token", res.data.accessToken);
+        localStorage.setItem("refresh_token", res.data.refreshToken);
+      });
   };
 
   const onLogin = async () => {
     try {
       await login();
-      navigate('/main');
-    }
-    catch (error: any) {
+      navigate("/main");
+    } catch (error: any) {
       if (error.response.data.status == 400) alert("비밀번호가 맞지 않습니다.");
-      else if (error.response.data.status == 404) alert("가입되지 않은 아이디입니다.");
-    };
+      else if (error.response.data.status == 404)
+        alert("가입되지 않은 아이디입니다.");
+    }
   };
 
   return (
@@ -57,11 +57,7 @@ const Login = () => {
         {Text.map((list) => (
           <S.LoginInput>
             <S.Title>{list.title}</S.Title>
-            <S.Input
-              type={list.type}
-              name={list.name}
-              onChange={onChange}
-            />
+            <S.Input type={list.type} name={list.name} onChange={onChange} />
           </S.LoginInput>
         ))}
       </S.Inputs>

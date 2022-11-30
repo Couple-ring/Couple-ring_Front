@@ -1,5 +1,13 @@
 import * as S from "./styles";
-import { CoupleringLogo, Profile, List, Door, ClickProfile, ReviseIcon, Heart } from "../../assets";
+import {
+  CoupleringLogo,
+  Profile,
+  List,
+  Door,
+  ClickProfile,
+  ReviseIcon,
+  Heart,
+} from "../../assets";
 import { getAccessToken } from "../../utils/Token";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -20,7 +28,7 @@ const Header = () => {
           <img src={CoupleringLogo} />
         </Link>
         <Btns setIsDelete={setIsDelete} setIsLogout={setIsLogout} />
-      </S.Container >
+      </S.Container>
       {isDelete && <DeleteAccountModal setIsDelete={setIsDelete} />}
       {isLogout && <LogoutModal setIsLogout={setIsLogout} />}
     </>
@@ -30,7 +38,7 @@ const Header = () => {
 interface CheckModalProps {
   setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLogout: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 function Btns({ setIsDelete, setIsLogout }: CheckModalProps): JSX.Element {
   const accessToken: string | null = getAccessToken();
@@ -38,35 +46,37 @@ function Btns({ setIsDelete, setIsLogout }: CheckModalProps): JSX.Element {
 
   return (
     <>
-      {accessToken ?
-        (
-          <S.Btn>
-            <img
-              onClick={() => setIsClickProfile(!isClickProfile)}
-              src={isClickProfile ? ClickProfile : Profile} />
-            <Link to="/history">
-              <img src={List} />
-            </Link>
-            <img onClick={() => setIsLogout(true)} src={Door} />
-            {isClickProfile && <MyPageModal setIsDelete={setIsDelete} />}
-          </S.Btn>
-        ) :
-        (
-          <S.Btn>
-            <Link to="/login">
-              <span>로그인</span>
-            </Link>
-            <Link to="/signup">
-              <span> 회원가입</span>
-            </Link>
-          </S.Btn>
-        )
-      }
+      {accessToken ? (
+        <S.Btn>
+          <img
+            onClick={() => setIsClickProfile(!isClickProfile)}
+            src={isClickProfile ? ClickProfile : Profile}
+          />
+          <Link to="/history">
+            <img src={List} />
+          </Link>
+          <img onClick={() => setIsLogout(true)} src={Door} />
+          {isClickProfile && <MyPageModal setIsDelete={setIsDelete} />}
+        </S.Btn>
+      ) : (
+        <S.Btn>
+          <Link to="/login">
+            <span>로그인</span>
+          </Link>
+          <Link to="/signup">
+            <span> 회원가입</span>
+          </Link>
+        </S.Btn>
+      )}
     </>
   );
-};
+}
 
-const MyPageModal = ({ setIsDelete }: { setIsDelete: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const MyPageModal = ({
+  setIsDelete,
+}: {
+  setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [name, setName] = useState<string>("");
   const [id, setId] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
@@ -74,25 +84,27 @@ const MyPageModal = ({ setIsDelete }: { setIsDelete: React.Dispatch<React.SetSta
 
   const getMyInfo = async () => {
     const access_token = getAccessToken();
-    await axios.get(`${BASE_URL}/auth/mypage`,
-      {
-        headers: { Authorization: `Bearer ${access_token}` }
-      }
-    ).then((res) => {
-      setName(res.data.name);
-      setId(res.data.accountId);
-      setStartDate(res.data.startDate);
-      setDay(res.data.day);
-    }).catch((error) => {
-      if (error.response.status === 401) {
-        tokenReissue()
-          .then(() => {
-            getMyInfo();
-          }).catch((error) => {
-            console.log(error);
-          })
-      };
-    });
+    await axios
+      .get(`${BASE_URL}/auth/mypage`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      .then((res) => {
+        setName(res.data.name);
+        setId(res.data.accountId);
+        setStartDate(res.data.startDate);
+        setDay(res.data.day);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          tokenReissue()
+            .then(() => {
+              getMyInfo();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      });
   };
 
   useEffect(() => {
@@ -131,21 +143,25 @@ const MyPageModal = ({ setIsDelete }: { setIsDelete: React.Dispatch<React.SetSta
   );
 };
 
-const DeleteAccountModal = ({ setIsDelete }: { setIsDelete: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const DeleteAccountModal = ({
+  setIsDelete,
+}: {
+  setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const access_token = getAccessToken();
   const navigate = useNavigate();
 
   const onDeleteAccount = async () => {
-    await axios.delete(`${BASE_URL}/auth/resign`,
-      {
-        headers: { Authorization: `Bearer ${access_token}` }
-      }
-    ).then(() => {
-      localStorage.removeItem('couple_ring_access_token');
-      setIsDelete(false);
-      navigate('/login');
-      alert("탈퇴가 완료되었습니다.");
-    });
+    await axios
+      .delete(`${BASE_URL}/auth/resign`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      .then(() => {
+        localStorage.removeItem("couple_ring_access_token");
+        setIsDelete(false);
+        navigate("/login");
+        alert("탈퇴가 완료되었습니다.");
+      });
   };
 
   return (
@@ -154,20 +170,26 @@ const DeleteAccountModal = ({ setIsDelete }: { setIsDelete: React.Dispatch<React
         <S.AccountBoxHead>탈퇴 하시겠습니까?</S.AccountBoxHead>
         <S.AccountBoxBtns>
           <S.AccountBoxBtn onClick={onDeleteAccount}>예</S.AccountBoxBtn>
-          <S.AccountBoxBtn onClick={() => setIsDelete(false)}>아니요</S.AccountBoxBtn>
+          <S.AccountBoxBtn onClick={() => setIsDelete(false)}>
+            아니요
+          </S.AccountBoxBtn>
         </S.AccountBoxBtns>
       </S.AccountBox>
-    </S.Background >
+    </S.Background>
   );
 };
 
-const LogoutModal = ({ setIsLogout }: { setIsLogout: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const LogoutModal = ({
+  setIsLogout,
+}: {
+  setIsLogout: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const navigate = useNavigate();
 
   const onLogout = () => {
-    localStorage.removeItem('couple_ring_access_token')
+    localStorage.removeItem("couple_ring_access_token");
     setIsLogout(false);
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -176,10 +198,12 @@ const LogoutModal = ({ setIsLogout }: { setIsLogout: React.Dispatch<React.SetSta
         <S.AccountBoxHead>로그아웃 하시겠습니까?</S.AccountBoxHead>
         <S.AccountBoxBtns>
           <S.AccountBoxBtn onClick={onLogout}>예</S.AccountBoxBtn>
-          <S.AccountBoxBtn onClick={() => setIsLogout(false)}>아니요</S.AccountBoxBtn>
+          <S.AccountBoxBtn onClick={() => setIsLogout(false)}>
+            아니요
+          </S.AccountBoxBtn>
         </S.AccountBoxBtns>
       </S.AccountBox>
-    </S.Background >
+    </S.Background>
   );
 };
 

@@ -8,28 +8,25 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const CoupleInfo = () => {
   const navigate = useNavigate();
   const [id, setId] = useState<string>("");
-  const myAccountId = localStorage.getItem('myId');
+  const myAccountId = localStorage.getItem("myId");
   const connect = async () => {
-    await axios.patch(`${BASE_URL}/auth/connect`,
-      {
-        coupleAccountId: id,
-        myAccountId: myAccountId,
-      }
-    );
+    await axios.patch(`${BASE_URL}/auth/connect`, {
+      coupleAccountId: id,
+      myAccountId: myAccountId,
+    });
   };
   const onConnect = async () => {
     if (id == myAccountId) {
       alert("본인은 본인과 연결할 수 없습니다.");
-    }
-    else {
+    } else {
       try {
         await connect();
-        navigate('/login');
+        navigate("/login");
+      } catch (error: any) {
+        if (error.response.data.status === 404)
+          alert("존재하지 않는 아이디입니다.");
       }
-      catch (error: any) {
-        if (error.response.data.status === 404) alert("존재하지 않는 아이디입니다.");
-      }
-    };
+    }
   };
 
   return (
@@ -39,7 +36,9 @@ const CoupleInfo = () => {
         <S.SignupInput>
           <S.Title>연인 아이디</S.Title>
           <S.Input
-            onChange={(e) => { setId(e.target.value) }}
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
           />
         </S.SignupInput>
       </S.Inputs>

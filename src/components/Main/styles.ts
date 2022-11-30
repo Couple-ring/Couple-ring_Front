@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { MainColor, PointColor, COLOR } from "../../style";
 
-export const Container = styled.div` 
+export const Container = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17,7 +17,7 @@ export const Head = styled.div`
   height: 92px;
   background: ${PointColor};
   border-radius: 20px 20px 0px 0px;
-  font-weight: 600; 
+  font-weight: 600;
   font-size: 36px;
   line-height: 44px;
   color: white;
@@ -67,11 +67,11 @@ export const Content = styled.div`
   width: calc(inherit - 60px);
   padding: 0 30px;
   margin-top: 30px;
-  >img{
+  > img {
     width: 273px;
     height: 273px;
     border-radius: 12px;
-  };
+  }
 `;
 export const Title = styled.span`
   font-weight: 600;
