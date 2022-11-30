@@ -1,5 +1,5 @@
-export const MainColor = "#FFDFEE";
-export const PointColor = "#FFBDDD";
+export const MainColor = "#D4E5FF";
+export const PointColor = "#81B3FF";
 
 export const COLOR = {
   red: "#FF8181",
