@@ -1,6 +1,6 @@
 import { ReviseIcon, NullImg, Sad, Happy, Angry, Soso } from "../../assets";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./styles";
 import axios from "axios";
 import { getAccessToken } from "../../utils/Token";
@@ -9,12 +9,9 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Main = () => {
   const [isSignup, setIsSignup] = useState<boolean>(false);
-  const today: string =
-    new Date().getFullYear() +
-    "-" +
-    (new Date().getMonth() + 1) +
-    "-" +
-    new Date().getDate();
+  const { date } = useParams();
+  const today: any =
+    date == null ? new Date().toISOString().slice(0, 10) : date;
   const [day, setDay] = useState<number>(0);
   const [myDiary, setMyDiary] = useState([]);
   const [coupleDiary, setCoupleDiary] = useState([]);
@@ -39,7 +36,7 @@ const Main = () => {
   return (
     <S.Container>
       <S.Head>
-        <span>오늘 &#41; {today}</span>
+        <span>{today}</span>
         <span>{day}일</span>
       </S.Head>
       {!isSignup ? (
