@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { PointColor, MainColor } from "../../../style";
 
 export const Wrapper = styled.div`
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   position: absolute;
   width: 548px;
@@ -51,7 +51,7 @@ export const Input = styled.input`
   color: white;
   padding: 0 10px;
   font-weight: 600;
-  :focus{
+  :focus {
     background: ${PointColor};
   }
 `;
@@ -66,7 +66,7 @@ export const SignupBtn = styled.button`
   border: none;
   margin-left: 156px;
   margin-top: 35px;
-  :hover{
+  :hover {
     background: ${PointColor};
   }
 `;
