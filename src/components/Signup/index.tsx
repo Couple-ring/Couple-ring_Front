@@ -33,7 +33,7 @@ const CheckModal = ({ setInfo, setSignupCheck }: CheckModalProps) => {
 
   const goLogin = () => {
     alert("로그인을 진행해주세요.");
-    navigate("/main");
+    navigate("/login");
   };
 
   return (
