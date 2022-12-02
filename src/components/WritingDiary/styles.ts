@@ -10,7 +10,7 @@ export const Container = styled.div`
   top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
-  >img{
+  > img {
     position: absolute;
     width: 217px;
     height: 217px;
@@ -47,7 +47,7 @@ export const TitleInput = styled.input`
   font-weight: 600;
   font-size: 28px;
   color: ${PointColor};
-  ::placeholder{
+  ::placeholder {
     color: ${MainColor};
   }
 `;
@@ -61,9 +61,10 @@ export const MoodInput = styled.button`
   padding: 16px;
   border: none;
   background: white;
-  >img{
+  > img {
     height: 35px;
   }
+  gap: 30px;
 `;
 export const DiaryContent = styled.textarea`
   width: 648px;
@@ -77,7 +78,7 @@ export const DiaryContent = styled.textarea`
   border: none;
   font-family: ${Font};
   outline: none;
-  ::placeholder{
+  ::placeholder {
     color: ${MainColor};
   }
 `;
@@ -93,34 +94,6 @@ export const PostBtn = styled.button`
   margin-left: 20px;
   border: none;
 `;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const Box = styled.div`
   width: 385px;
   height: 303px;
@@ -134,6 +107,7 @@ export const Box = styled.div`
   position: absolute;
   top: 90px;
   left: 150px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const ImgBox = styled.div`
   width: 339px;
@@ -143,7 +117,7 @@ export const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  >img{
+  > img {
     height: 35px;
   }
 `;

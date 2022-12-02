@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
   gap: 20px;
   align-items: center;
   margin-top: 30px;
-  >img{
+  > img {
     width: 273px;
     height: 273px;
     border-radius: 12px;
@@ -42,7 +42,7 @@ export const Wrapper = styled.div`
 export const Title = styled.input`
   width: 670px;
   height: 64px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 12px;
   font-size: 24px;
   display: flex;
@@ -105,6 +105,7 @@ export const Box = styled.div`
   position: absolute;
   top: 90px;
   left: 150px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const ImgBox = styled.div`
   width: 339px;
@@ -114,7 +115,7 @@ export const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  >img{
+  > img {
     height: 35px;
   }
 `;
