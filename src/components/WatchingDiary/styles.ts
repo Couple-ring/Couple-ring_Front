@@ -24,7 +24,7 @@ export const Head = styled.div`
   color: white;
   align-items: center;
   > img {
-    width: 320px;
+    height: 40px;
   }
 `;
 export const Wrapper = styled.div`
