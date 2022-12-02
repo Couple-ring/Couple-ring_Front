@@ -1,4 +1,4 @@
-import { ReviseIcon, NullImg, Sad, Happy, Angry, Soso } from "../../assets";
+import { ReviseIcon, Sad, Happy, Angry, Soso } from "../../assets";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./styles";
@@ -8,7 +8,6 @@ import { getAccessToken } from "../../utils/Token";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Main = () => {
-  const [isSignup, setIsSignup] = useState<boolean>(false);
   const { date } = useParams();
   const today: any =
     date == null ? new Date().toISOString().slice(0, 10) : date;
@@ -39,11 +38,7 @@ const Main = () => {
         <span>{today}</span>
         <span>{day}일</span>
       </S.Head>
-      {!isSignup ? (
-        <DiaryContainer myDiary={myDiary} coupleDiary={coupleDiary} />
-      ) : (
-        <NoSignup />
-      )}
+      <DiaryContainer myDiary={myDiary} coupleDiary={coupleDiary} />
     </S.Container>
   );
 };
@@ -57,35 +52,13 @@ const DiaryContainer = ({
 }) => {
   return (
     <S.Diarys>
-      <WriteDiary Diary={myDiary} />
-      <WriteDiary Diary={coupleDiary} />
+      <WriteDiary Diary={myDiary} mine={true} />
+      <WriteDiary Diary={coupleDiary} mine={false} />
     </S.Diarys>
   );
 };
 
-const NoSignup = () => {
-  const Text = [
-    { name: "안윤지", title: "아직 연인과 연결되지 않았습니다. " },
-    { name: "(NULL)", title: "아직 연인과 연결되지 않았습니다. " },
-  ];
-
-  return (
-    <S.Diarys>
-      {Text.map((list) => (
-        <S.Box>
-          <S.DiaryHead>
-            <span>{list.name}</span>
-          </S.DiaryHead>
-          <S.Content>
-            <S.Title>{list.title}</S.Title>
-          </S.Content>
-        </S.Box>
-      ))}
-    </S.Diarys>
-  );
-};
-
-const WriteDiary = ({ Diary }: { Diary: any }) => {
+const WriteDiary = ({ Diary, mine }: { Diary: any; mine: boolean }) => {
   const previewText: any =
     Diary.content?.length < 80
       ? Diary.content
@@ -109,12 +82,17 @@ const WriteDiary = ({ Diary }: { Diary: any }) => {
       <S.DiaryHead>
         <span>{Diary.name}</span>
         <img src={Mood()} />
+        {mine && (
+          <span onClick={() => navigate(`/revise_diary/${Diary.id}`)}>
+            수정
+          </span>
+        )}
       </S.DiaryHead>
-      <S.Content onClick={() => navigate(`/revise_diary/${Diary.id}`)}>
+      <S.Content onClick={() => navigate(`/watch_diary/${Diary.id}`)}>
         <S.Title>{Diary.title}</S.Title>
         <S.Post>{previewText}</S.Post>
-        <S.Title>오늘의 이미지</S.Title>
-        {Diary.Url == null ? <img src={NullImg} /> : <img src={Diary.Url} />}
+        {/* <S.Title>오늘의 이미지</S.Title> */}
+        {/* {Diary.Url == null ? <img src={NullImg} /> : <img src={Diary.Url} />} */}
       </S.Content>
     </S.Box>
   );

@@ -18,11 +18,11 @@ const MyInfo = ({ setSignupCheck }: MyInfoProps) => {
   ];
 
   const [inputs, setInputs] = useState({
-    name: '',
-    id: '',
-    password: '',
-    checkPassword: '',
-    startDate: '',
+    name: "",
+    id: "",
+    password: "",
+    checkPassword: "",
+    startDate: "",
   });
 
   const { name, id, password, checkPassword, startDate } = inputs;
@@ -36,30 +36,26 @@ const MyInfo = ({ setSignupCheck }: MyInfoProps) => {
   };
 
   const signup = async () => {
-    await axios.post(`${BASE_URL}/auth/signup`,
-      {
-        accountId: id,
-        name: name,
-        password: password,
-        startDate: startDate
-      }
-    );
+    await axios.post(`${BASE_URL}/auth/signup`, {
+      accountId: id,
+      name: name,
+      password: password,
+      startDate: startDate,
+    });
   };
 
   const onSignup = async () => {
     if (password === checkPassword) {
       try {
         await signup();
-        localStorage.setItem('myId', id);
+        localStorage.setItem("myId", id);
         setSignupCheck(true);
-      }
-      catch (error: any) {
+      } catch (error: any) {
         if (error.response.data.status === 400) alert("존재하는 아이디입니다.");
-      };
+      }
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
     }
-    else {
-      alert("비밀번호가 일치하지 않습니다.")
-    };
   };
 
   return (
@@ -69,11 +65,7 @@ const MyInfo = ({ setSignupCheck }: MyInfoProps) => {
         {Text.map((list) => (
           <S.SignupInput>
             <S.Title>{list.title}</S.Title>
-            <S.Input
-              type={list.type}
-              name={list.name}
-              onChange={onChange}
-            />
+            <S.Input type={list.type} name={list.name} onChange={onChange} />
           </S.SignupInput>
         ))}
       </S.Inputs>

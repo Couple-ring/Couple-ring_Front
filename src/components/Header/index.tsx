@@ -74,9 +74,6 @@ function Btns({ setIsDelete, setIsLogout }: CheckModalProps): JSX.Element {
             onClick={() => setIsClickProfile(!isClickProfile)}
             src={isClickProfile ? ClickProfile : Profile}
           />
-          <Link to="/history">
-            <img src={List} />
-          </Link>
           <img onClick={() => setIsLogout(true)} src={Door} />
           {isClickProfile && <MyPageModal setIsDelete={setIsDelete} />}
         </S.Btn>
