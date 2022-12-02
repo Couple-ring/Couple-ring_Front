@@ -18,3 +18,5 @@ export { default as SadPink } from "./imgs/sadPink.svg";
 export { default as SosoPink } from "./imgs/sosoPink.svg";
 export { default as AngryPink } from "./imgs/angryPink.svg";
 export { default as NullImg } from "./imgs/nullImg.png";
+export { default as BlueReviseIcon } from "./imgs/bluereviseicon.svg";
+export { default as ClickBlueReviseIcon } from "./imgs/clickbluereviseicon.svg";
