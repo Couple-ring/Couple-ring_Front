@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { COLOR, PointColor } from "../../style";
+import { COLOR, PointColor, MainColor, Font } from "../../style";
 
 export const Background = styled.div`
   width: 100vw;
-  height: calc( 100vh - 64px);
+  height: calc(100vh - 64px);
   background: rgba(255, 255, 255, 0.5);
   z-index: 99;
   position: absolute;
@@ -13,7 +13,7 @@ export const Container = styled.div`
   height: 64px;
   background: ${PointColor};
   display: flex;
-  img{
+  img {
     width: 95px;
   }
   justify-content: space-around;
@@ -25,10 +25,10 @@ export const Btn = styled.div`
   font-size: 24px;
   gap: 40px;
   color: white;
-  img{
+  img {
     width: 40px;
   }
-  >a{
+  > a {
     text-decoration: none;
     color: white;
     display: flex;
@@ -37,7 +37,7 @@ export const Btn = styled.div`
 export const Box = styled.div`
   width: 424px;
   height: 260px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   position: absolute;
@@ -57,7 +57,7 @@ export const BoxHead = styled.div`
   font-size: 32px;
   color: white;
   justify-content: space-between;
-  >img{
+  > img {
     width: 30px;
   }
 `;
@@ -94,16 +94,16 @@ export const DeleteBtn = styled.button`
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
-  :hover{
+  :hover {
     background: ${COLOR.red};
   }
 `;
 export const DateInfo = styled.div`
   display: flex;
   color: black;
-  >img{
+  > img {
     width: 23px;
   }
   gap: 60px;
@@ -125,7 +125,7 @@ export const AccountBox = styled.div`
   height: 221px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  background: #FFFFFF;
+  background: #ffffff;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -156,7 +156,7 @@ export const AccountBoxBtn = styled.div`
   height: 74px;
   border-radius: 12px;
   background: ${COLOR.pink};
-  :hover{
+  :hover {
     background: ${COLOR.red};
   }
   display: flex;
@@ -165,4 +165,17 @@ export const AccountBoxBtn = styled.div`
   font-weight: 600;
   font-size: 32px;
   color: white;
+`;
+export const SearchInput = styled.input`
+  width: 430px;
+  height: 49px;
+  background: #ffffff;
+  border-radius: 100px;
+  outline: none;
+  border: none;
+  padding: 0 20px;
+  color: ${PointColor};
+  font-size: 24px;
+  font-weight: 700;
+  font-family: ${Font};
 `;

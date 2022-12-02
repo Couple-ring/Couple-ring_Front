@@ -7,6 +7,8 @@ import {
   ClickProfile,
   ReviseIcon,
   Heart,
+  ClickSearchIcon,
+  SearchIcon,
 } from "../../assets";
 import { getAccessToken } from "../../utils/Token";
 import { Link } from "react-router-dom";
@@ -42,12 +44,32 @@ interface CheckModalProps {
 
 function Btns({ setIsDelete, setIsLogout }: CheckModalProps): JSX.Element {
   const accessToken: string | null = getAccessToken();
+  const [isClick, setIsClick] = useState<boolean>(false);
   const [isClickProfile, setIsClickProfile] = useState<boolean>(false);
+  const [date, setDate] = useState<string>("");
+  const naigate = useNavigate();
+
+  const goDiary = () => {
+    naigate(`/main/${date}`);
+  };
 
   return (
     <>
       {accessToken ? (
         <S.Btn>
+          {isClick && (
+            <S.SearchInput
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+              onKeyPress={goDiary}
+            />
+          )}
+          <img src={ReviseIcon} onClick={() => naigate("/writing_diary")} />
+          {isClick ? (
+            <img onClick={() => setIsClick(false)} src={ClickSearchIcon} />
+          ) : (
+            <img onClick={() => setIsClick(true)} src={SearchIcon} />
+          )}
           <img
             onClick={() => setIsClickProfile(!isClickProfile)}
             src={isClickProfile ? ClickProfile : Profile}
