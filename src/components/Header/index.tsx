@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { tokenReissue } from "../../utils/Token";
+import MyPageModal from "./Modal";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -90,77 +91,6 @@ function Btns({ setIsDelete, setIsLogout }: CheckModalProps): JSX.Element {
     </>
   );
 }
-
-const MyPageModal = ({
-  setIsDelete,
-}: {
-  setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const [name, setName] = useState<string>("");
-  const [id, setId] = useState<string>("");
-  const [startDate, setStartDate] = useState<string>("");
-  const [day, setDay] = useState<number>(0);
-
-  const getMyInfo = async () => {
-    const access_token = getAccessToken();
-    await axios
-      .get(`${BASE_URL}/auth/mypage`, {
-        headers: { Authorization: `Bearer ${access_token}` },
-      })
-      .then((res) => {
-        setName(res.data.name);
-        setId(res.data.accountId);
-        setStartDate(res.data.startDate);
-        setDay(res.data.day);
-      })
-      .catch((error) => {
-        if (error.response.status === 401) {
-          tokenReissue()
-            .then(() => {
-              getMyInfo();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      });
-  };
-
-  useEffect(() => {
-    getMyInfo();
-  }, []);
-
-  return (
-    <>
-      <S.Box>
-        <S.BoxHead>
-          <>ME</>
-          <img src={ReviseIcon} />
-        </S.BoxHead>
-        <S.Information>
-          <S.MyAccount>
-            <S.Me>
-              <S.MyName>{name}</S.MyName>
-              <S.MyId>{id}</S.MyId>
-            </S.Me>
-            <S.DeleteBtn onClick={() => setIsDelete(true)}>탈퇴</S.DeleteBtn>
-          </S.MyAccount>
-          <S.DateInfo>
-            <S.DateWrapper>
-              <S.Title>우리의 시작</S.Title>
-              <S.Date>{startDate}</S.Date>
-            </S.DateWrapper>
-            <img src={Heart} />
-            <S.DateWrapper>
-              <S.Title>사랑한지</S.Title>
-              <S.Date>{day}일째</S.Date>
-            </S.DateWrapper>
-          </S.DateInfo>
-        </S.Information>
-      </S.Box>
-    </>
-  );
-};
 
 const DeleteAccountModal = ({
   setIsDelete,
