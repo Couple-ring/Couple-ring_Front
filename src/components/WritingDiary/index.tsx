@@ -25,7 +25,7 @@ const WritingDiary = () => {
   const [moodImg, setMoodImg] = useState<string>(HappyPink);
   const [isMoodModal, setIsMoodModal] = useState<boolean>(false);
   const [preview, setPreview] = useState(Test);
-  // const fileInput = useRef<any>(null);
+  const fileInput = useRef<any>(null);
 
   const settingMood = () => {
     switch (moodImg) {
@@ -48,21 +48,21 @@ const WritingDiary = () => {
   });
   const { title, content } = inputs;
 
-  // const imgChange = (e: any) => {
-  //   if (e.target.files[0]) {
-  //     setPreview(e.target.files[0]);
-  //   } else {
-  //     setPreview(preview);
-  //     return;
-  //   }
-  //   const reader: any = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       setPreview(reader.result);
-  //     }
-  //   };
-  //   reader.readAsDataURL(e.target.files[0]);
-  // };
+  const imgChange = (e: any) => {
+    if (e.target.files[0]) {
+      setPreview(e.target.files[0]);
+    } else {
+      setPreview(preview);
+      return;
+    }
+    const reader: any = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   const onChange = (e: any) => {
     const { name, value } = e.target;
@@ -118,7 +118,7 @@ const WritingDiary = () => {
           />
         </S.Inputs>
         <S.PostBtn onClick={onPost}>게시하기</S.PostBtn>
-        {/* <input
+        <input
           onChange={imgChange}
           type="file"
           ref={fileInput}
@@ -129,7 +129,7 @@ const WritingDiary = () => {
           onClick={() => {
             fileInput.current.click();
           }}
-        /> */}
+        />
       </S.Container>
       {isMoodModal && <MoodModal setMoodImg={setMoodImg} />}
     </>

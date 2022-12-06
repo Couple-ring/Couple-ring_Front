@@ -11,7 +11,7 @@ import {
   Soso,
   Angry,
 } from "../../assets";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { getAccessToken } from "../../utils/Token";
 import { useParams } from "react-router-dom";
@@ -21,7 +21,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const ReviseDiary = () => {
   const navigate = useNavigate();
-  // const fileInput = useRef<any>(null);
+  const fileInput = useRef<any>(null);
   const { id } = useParams();
   const [isMood, setIsMood] = useState<boolean>(false);
   const [fileName, setFileName] = useState<any>(Test);
@@ -57,22 +57,22 @@ const ReviseDiary = () => {
 
   const mood = settingMood();
 
-  // const upLoadFile = async () => {
-  //   const access_token = getAccessToken();
-  //   const formData = new FormData();
-  //   let file = new Blob([preview]);
-  //   formData.append("file", file, fileName);
-  //   await axios
-  //     .post(`${BASE_URL}/file`, formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //         Authorization: `Bearer ${access_token}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setResImg(res.data.fileName);
-  //     });
-  // };
+  const upLoadFile = async () => {
+    const access_token = getAccessToken();
+    const formData = new FormData();
+    let file = new Blob([preview]);
+    formData.append("file", file, fileName);
+    await axios
+      .post(`${BASE_URL}/file`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => {
+        setResImg(res.data.fileName);
+      });
+  };
 
   const revise = async () => {
     const access_token = getAccessToken();
@@ -110,22 +110,22 @@ const ReviseDiary = () => {
     });
   };
 
-  // const imgChange = (e: any) => {
-  //   if (e.target.files[0]) {
-  //     setPreview(e.target.files[0]);
-  //     setFileName(e.target.files[0].name);
-  //   } else {
-  //     setPreview(preview);
-  //     return;
-  //   }
-  //   const reader: any = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       setPreview(reader.result);
-  //     }
-  //   };
-  //   reader.readAsDataURL(e.target.files[0]);
-  // };
+  const imgChange = (e: any) => {
+    if (e.target.files[0]) {
+      setPreview(e.target.files[0]);
+      setFileName(e.target.files[0].name);
+    } else {
+      setPreview(preview);
+      return;
+    }
+    const reader: any = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   return (
     <>
@@ -137,7 +137,7 @@ const ReviseDiary = () => {
         <S.Wrapper>
           <S.Title name="title" onChange={onChange} />
           <S.Content name="content" onChange={onChange} />
-          {/* <input
+          <input
             onChange={imgChange}
             type="file"
             ref={fileInput}
@@ -148,7 +148,7 @@ const ReviseDiary = () => {
             onClick={() => {
               fileInput.current.click();
             }}
-          /> */}
+          />
         </S.Wrapper>
         <S.ReviseBtn onClick={onRevise}>수정하기</S.ReviseBtn>
       </S.Container>
