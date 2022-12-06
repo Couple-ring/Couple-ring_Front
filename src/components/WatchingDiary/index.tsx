@@ -1,6 +1,6 @@
 import * as S from "./styles";
-import { Happy, Sad, Soso, Angry } from "../../assets";
-// import TodayImg from "./modal";
+import { Happy, Sad, Soso, Angry, NullImg } from "../../assets";
+import TodayImg from "./modal";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -50,11 +50,11 @@ function WatchingDiary(): JSX.Element {
           <S.Title>{diary.title}</S.Title>
           <S.Content>
             {diary.content}
-            {/* <S.ImgBtn onClick={() => setIsImg(true)}>오늘의 이미지</S.ImgBtn> */}
+            <S.ImgBtn onClick={() => setIsImg(true)}>오늘의 이미지</S.ImgBtn>
           </S.Content>
         </S.Wrapper>
       </S.Container>
-      {/* {isImg && <TodayImg setIsImg={setIsImg} />} */}
+      {isImg && <TodayImg setIsImg={setIsImg} />}
     </>
   );
 }

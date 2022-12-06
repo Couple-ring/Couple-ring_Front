@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { PointColor } from "../../../style";
-import { ImgIcon, Test } from "../../../assets";
+import { ImgIcon, Test, NullImg } from "../../../assets";
 
 interface CheckModalProps {
   setIsImg: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 function TodayImg({ setIsImg }: CheckModalProps): JSX.Element {
   return (
@@ -15,15 +15,13 @@ function TodayImg({ setIsImg }: CheckModalProps): JSX.Element {
             <span>오늘의 이미지</span>
             <img src={ImgIcon} />
           </HeadLeft>
-          <HeadRight onClick={() => setIsImg(false)}>
-            X
-          </HeadRight>
+          <HeadRight onClick={() => setIsImg(false)}>X</HeadRight>
         </Head>
-        <img src={Test} />
+        <img src={NullImg} />
       </Container>
     </Background>
   );
-};
+}
 
 const Background = styled.div`
   width: 100vw;
@@ -35,7 +33,7 @@ const Background = styled.div`
 const Container = styled.div`
   width: 603px;
   height: 659px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   top: 50%;
@@ -44,7 +42,7 @@ const Container = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  >img{
+  > img {
     position: absolute;
     width: 538px;
     top: 55%;

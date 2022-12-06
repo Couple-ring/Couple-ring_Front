@@ -1,4 +1,4 @@
-import { ReviseIcon, Sad, Happy, Angry, Soso } from "../../assets";
+import { ReviseIcon, Sad, Happy, Angry, Soso, NullImg } from "../../assets";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./styles";
@@ -30,7 +30,7 @@ const Main = () => {
 
   useEffect(() => {
     getDiary();
-  }, []);
+  }, [date]);
 
   return (
     <S.Container>
@@ -91,8 +91,8 @@ const WriteDiary = ({ Diary, mine }: { Diary: any; mine: boolean }) => {
       <S.Content onClick={() => navigate(`/watch_diary/${Diary.id}`)}>
         <S.Title>{Diary.title}</S.Title>
         <S.Post>{previewText}</S.Post>
-        {/* <S.Title>오늘의 이미지</S.Title> */}
-        {/* {Diary.Url == null ? <img src={NullImg} /> : <img src={Diary.Url} />} */}
+        <S.Title>오늘의 이미지</S.Title>
+        {Diary.Url == null ? <img src={NullImg} /> : <img src={Diary.Url} />}
       </S.Content>
     </S.Box>
   );
