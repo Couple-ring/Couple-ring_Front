@@ -44,7 +44,7 @@ const MyPageModal = ({
 
   useEffect(() => {
     getMyInfo();
-  }, []);
+  }, [isClicked]);
 
   return (
     <>
@@ -101,16 +101,54 @@ const ReviseMyProfile = ({
   startDate: string;
   setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const access_token = getAccessToken();
+  const [editName, setEditName] = useState("");
+  const onChange = (e: any) => {
+    setEditName(e.target.value);
+  };
+  const ReviseMyName = async () => {
+    if (editName == "") {
+      await axios
+        .patch(
+          `${BASE_URL}/auth/mypage`,
+          {
+            name: name,
+          },
+          {
+            headers: { Authorization: `Bearer ${access_token}` },
+          }
+        )
+        .then(() => {
+          setIsClicked(false);
+        });
+    } else {
+      await axios
+        .patch(
+          `${BASE_URL}/auth/mypage`,
+          {
+            name: editName,
+          },
+          {
+            headers: { Authorization: `Bearer ${access_token}` },
+          }
+        )
+        .then(() => {
+          alert("이름이 수정되었습니다.");
+          setIsClicked(false);
+        });
+    }
+  };
+
   return (
     <S.Box>
       <S.BoxHead>
         <div>ME</div>
-        <S.EditBtn onClick={() => setIsClicked(false)}>수정</S.EditBtn>
+        <S.EditBtn onClick={ReviseMyName}>수정</S.EditBtn>
       </S.BoxHead>
       <S.Information>
         <S.MyAccount>
           <S.Me>
-            <S.NameInput placeholder={name}></S.NameInput>
+            <S.NameInput onChange={onChange} placeholder={name} />
             <S.MyId>{id}</S.MyId>
           </S.Me>
         </S.MyAccount>
@@ -131,3 +169,51 @@ const ReviseMyProfile = ({
 };
 
 export default MyPageModal;
+
+var a = 1312;
+console.log(a); //1312
+console.log(this.a); //1312
+console.log(window.a); // 1312
+
+var frontGenius = "강석현 선배님";
+console.log(frontGenius, this.frontGenius, window.frontGenius); // 강석현 선배님이 3번 나옴
+var frontGifted = "정지관";
+console.log(frontGifted, this.frontGifted, window.frontGifted); // 정지관이 3번 나옴
+
+var a = 1;
+delete window.a; //안 된다
+delete a; //이 것 또한 안 된다
+
+window.b = 1;
+delete window.b; //된다.
+delete b; //된다.
+
+var func = function (x) {
+  console.log(this, x);
+};
+
+func(1); // Window{ ... } 1
+
+var obj = {
+  method: func,
+  name: "안윤지",
+};
+
+obj.method(2); // method{ name: '안윤지', method: f } 2
+
+var obj1 = {
+  outer: function () {
+    console.log(this);
+    var innerFunc = function () {
+      console.log(this);
+    };
+    innerFunc(); // 앞에 . 없었으므로 함수로서 호출 this 지정 x
+
+    var obj2 = {
+      innerMethod: innerFunc,
+    };
+    obj2.innerMethod(); // 메서드로서 호출 obj2의 정보
+  },
+};
+obj1.outer(); // 메서드로서 호출 obj1의 정보
+// (1) => obj1, (2) => 전역객체(window), (3) => obj2
