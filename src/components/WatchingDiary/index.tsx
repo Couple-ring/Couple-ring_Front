@@ -39,7 +39,8 @@ function WatchingDiary(): JSX.Element {
 
   useEffect(() => {
     getDiary();
-  });
+  }, []);
+
   return (
     <>
       <S.Container>
@@ -54,7 +55,7 @@ function WatchingDiary(): JSX.Element {
           </S.Content>
         </S.Wrapper>
       </S.Container>
-      {isImg && <TodayImg setIsImg={setIsImg} />}
+      {isImg && <TodayImg setIsImg={setIsImg} img={diary.imageUrl}/>}
     </>
   );
 }
