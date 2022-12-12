@@ -9,7 +9,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Main = () => {
   const { date } = useParams();
-  const today: any =
+  const today: string =
     date == null ? new Date().toISOString().slice(0, 10) : date;
   const [day, setDay] = useState<number>(0);
   const [myDiary, setMyDiary] = useState([]);
@@ -59,7 +59,7 @@ const DiaryContainer = ({
 };
 
 const WriteDiary = ({ Diary, mine }: { Diary: any; mine: boolean }) => {
-  const previewText: any =
+  const previewText: string =
     Diary.content?.length < 80
       ? Diary.content
       : Diary.content?.substring(0, 80) + " ...";
@@ -92,7 +92,11 @@ const WriteDiary = ({ Diary, mine }: { Diary: any; mine: boolean }) => {
         <S.Title>{Diary.title}</S.Title>
         <S.Post>{previewText}</S.Post>
         <S.Title>오늘의 이미지</S.Title>
-        {Diary.Url == null ? <img src={NullImg} /> : <img src={Diary.Url} />}
+        {Diary.imageUrl == null ? (
+          <img src={NullImg} />
+        ) : (
+          <img src={Diary.imageUrl} />
+        )}
       </S.Content>
     </S.Box>
   );

@@ -103,7 +103,7 @@ const ReviseMyProfile = ({
 }) => {
   const access_token = getAccessToken();
   const [editName, setEditName] = useState("");
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditName(e.target.value);
   };
   const ReviseMyName = async () => {
@@ -169,51 +169,3 @@ const ReviseMyProfile = ({
 };
 
 export default MyPageModal;
-
-var a = 1312;
-console.log(a); //1312
-console.log(this.a); //1312
-console.log(window.a); // 1312
-
-var frontGenius = "강석현 선배님";
-console.log(frontGenius, this.frontGenius, window.frontGenius); // 강석현 선배님이 3번 나옴
-var frontGifted = "정지관";
-console.log(frontGifted, this.frontGifted, window.frontGifted); // 정지관이 3번 나옴
-
-var a = 1;
-delete window.a; //안 된다
-delete a; //이 것 또한 안 된다
-
-window.b = 1;
-delete window.b; //된다.
-delete b; //된다.
-
-var func = function (x) {
-  console.log(this, x);
-};
-
-func(1); // Window{ ... } 1
-
-var obj = {
-  method: func,
-  name: "안윤지",
-};
-
-obj.method(2); // method{ name: '안윤지', method: f } 2
-
-var obj1 = {
-  outer: function () {
-    console.log(this);
-    var innerFunc = function () {
-      console.log(this);
-    };
-    innerFunc(); // 앞에 . 없었으므로 함수로서 호출 this 지정 x
-
-    var obj2 = {
-      innerMethod: innerFunc,
-    };
-    obj2.innerMethod(); // 메서드로서 호출 obj2의 정보
-  },
-};
-obj1.outer(); // 메서드로서 호출 obj1의 정보
-// (1) => obj1, (2) => 전역객체(window), (3) => obj2
