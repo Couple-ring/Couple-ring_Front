@@ -26,7 +26,8 @@ const ReviseDiary = () => {
   const [isMood, setIsMood] = useState<boolean>(false);
   const [fileName, setFileName] = useState<any>(Test);
   const [moodImg, setMoodImg] = useState<string>(Happy);
-  const [preview, setPreview] = useState(Test);
+  const [preview, setPreview] = useState<any>(Test);
+  const [upLoadImg, setUpLoadImg] = useState<File | null>(null);
   const [resImg, setResImg] = useState();
 
   const [reviseDiary, setReviseDiary] = useState({
@@ -57,49 +58,58 @@ const ReviseDiary = () => {
 
   const mood = settingMood();
 
+  const imgChange = (e: any) => {
+    if (e.target.files[0]) {
+      setUpLoadImg(e.target.files[0]);
+      setPreview(e.target.files[0]);
+    } else {
+      setUpLoadImg(upLoadImg);
+      setPreview(preview);
+      return;
+    }
+    const reader: FileReader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   const upLoadFile = async () => {
-    const access_token = getAccessToken();
+    if (!upLoadImg) return;
     const formData = new FormData();
-    let file = new Blob([preview]);
-    formData.append("file", file, fileName);
-    await axios
-      .post(`${BASE_URL}/file`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      .then((res) => {
-        setResImg(res.data.fileName);
-      });
+    formData.append("image", upLoadImg);
+    const response = await axios.post(`${BASE_URL}/images`, formData, {
+      headers: { "Content-Type": `multipart/form-data` },
+    });
+    return response.data.imageUrl;
   };
 
   const revise = async () => {
     const access_token = getAccessToken();
-    await axios
-      .patch(
-        `${BASE_URL}/diaries/${id}`,
-        {
-          title: title,
-          mood: mood,
-          fileId: resImg,
-          content: content,
-        },
-        { headers: { Authorization: `Bearer ${access_token}` } }
-      )
-      .then(() => {
-        alert("오늘자 다이어리가 수정되었습니다.");
-        navigate("/main");
-      });
+    await axios.patch(
+      `${BASE_URL}/diaries/${id}`,
+      {
+        title: title,
+        mood: mood,
+        imageUrl: await upLoadFile(),
+        content: content,
+      },
+      { headers: { Authorization: `Bearer ${access_token}` } }
+    );
   };
 
   const onRevise = async () => {
     try {
       await revise();
-    } catch (error) {
-      console.log(error);
+      alert("다이어리가 성공적으로 수정되었습니다.");
+      navigate("/main");
+    } catch (error: any) {
+      if (error.response.status == 400) {
+        alert("제목이나 내용은 null일 수 없습니다.");
+      }
     }
-    // await upLoadFile();
   };
 
   const onChange = (e: any) => {
@@ -110,23 +120,6 @@ const ReviseDiary = () => {
     });
   };
 
-  const imgChange = (e: any) => {
-    if (e.target.files[0]) {
-      setPreview(e.target.files[0]);
-      setFileName(e.target.files[0].name);
-    } else {
-      setPreview(preview);
-      return;
-    }
-    const reader: any = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setPreview(reader.result);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
   return (
     <>
       <S.Container>
@@ -135,8 +128,12 @@ const ReviseDiary = () => {
           <img onClick={() => setIsMood(!isMood)} src={ReviseIcon} />
         </S.Head>
         <S.Wrapper>
-          <S.Title name="title" onChange={onChange} />
-          <S.Content name="content" onChange={onChange} />
+          <S.Title name="title" onChange={onChange} placeholder="수정할 제목" />
+          <S.Content
+            name="content"
+            onChange={onChange}
+            placeholder="수정할 내용"
+          />
           <input
             onChange={imgChange}
             type="file"

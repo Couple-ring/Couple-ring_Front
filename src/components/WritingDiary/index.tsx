@@ -24,8 +24,16 @@ const WritingDiary = () => {
   const today: string = new Date().toISOString().slice(0, 10);
   const [moodImg, setMoodImg] = useState<string>(HappyPink);
   const [isMoodModal, setIsMoodModal] = useState<boolean>(false);
-  const [preview, setPreview] = useState(Test);
+  const [upLoadImg, setUpLoadImg] = useState<File | null>(null);
+  const [preview, setPreview] = useState<any>(Test);
   const fileInput = useRef<any>(null);
+  const [resImg, setResImg] = useState<any>();
+  const [inputs, setInputs] = useState({
+    title: "",
+    content: "",
+  });
+  const { title, content } = inputs;
+  //미리보기랑 등록할 사진 나누기
 
   const settingMood = () => {
     switch (moodImg) {
@@ -42,26 +50,32 @@ const WritingDiary = () => {
 
   const mood = settingMood();
 
-  const [inputs, setInputs] = useState({
-    title: "",
-    content: "",
-  });
-  const { title, content } = inputs;
-
   const imgChange = (e: any) => {
     if (e.target.files[0]) {
+      setUpLoadImg(e.target.files[0]);
       setPreview(e.target.files[0]);
     } else {
+      setUpLoadImg(upLoadImg);
       setPreview(preview);
       return;
     }
-    const reader: any = new FileReader();
+    const reader: FileReader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
         setPreview(reader.result);
       }
     };
     reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const upLoadFile = async () => {
+    if (!upLoadImg) return;
+    const formData = new FormData();
+    formData.append("image", upLoadImg);
+    const response = await axios.post(`${BASE_URL}/images`, formData, {
+      headers: { "Content-Type": `multipart/form-data` },
+    });
+    return response.data.imageUrl;
   };
 
   const onChange = (e: any) => {
@@ -79,7 +93,7 @@ const WritingDiary = () => {
       {
         title: title,
         mood: mood,
-        fileId: null,
+        imageUrl: await upLoadFile(),
         content: content,
       },
       {
@@ -93,8 +107,10 @@ const WritingDiary = () => {
       await post();
       alert("다이어리가 성공적으로 생성되었습니다.");
       navigate("/main");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response.status == 400) {
+        alert("제목이나 내용은 null일 수 없습니다.");
+      }
     }
   };
 
@@ -121,6 +137,7 @@ const WritingDiary = () => {
         <input
           onChange={imgChange}
           type="file"
+          accept="image/*"
           ref={fileInput}
           style={{ display: "none" }}
         />
