@@ -52,6 +52,9 @@ export const Title = styled.input`
   font-weight: 600;
   border: none;
   outline: none;
+  ::placeholder {
+    color: ${MainColor};
+  }
 `;
 export const Content = styled.textarea`
   width: 660px;
@@ -65,6 +68,9 @@ export const Content = styled.textarea`
   outline: none;
   font-weight: 600;
   font-family: ${Font};
+  ::placeholder {
+    color: ${MainColor};
+  }
 `;
 export const ImgBtn = styled.button`
   width: 230px;

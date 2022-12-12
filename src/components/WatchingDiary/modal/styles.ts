@@ -9,8 +9,8 @@ export const Background = styled.div`
   z-index: 3;
 `;
 export const Container = styled.div`
-  width: 603px;
-  height: 659px;
+  min-width: 603px;
+  min-height: 750px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;

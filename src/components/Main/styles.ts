@@ -68,8 +68,7 @@ export const Content = styled.div`
   padding: 0 30px;
   margin-top: 30px;
   > img {
-    width: 273px;
-    height: 273px;
+    width: 300px;
     border-radius: 12px;
   }
 `;
