@@ -24,24 +24,15 @@ const ReviseDiary = () => {
   const fileInput = useRef<any>(null);
   const { id } = useParams();
   const [isMood, setIsMood] = useState<boolean>(false);
-  const [fileName, setFileName] = useState<any>(Test);
   const [moodImg, setMoodImg] = useState<string>(Happy);
   const [preview, setPreview] = useState<any>(Test);
   const [upLoadImg, setUpLoadImg] = useState<File | null>(null);
-  const [resImg, setResImg] = useState();
 
   const [reviseDiary, setReviseDiary] = useState({
     title: "",
     content: "",
   });
   const { title, content } = reviseDiary;
-
-  const today: string =
-    new Date().getFullYear() +
-    "-" +
-    (new Date().getMonth() + 1) +
-    "-" +
-    new Date().getDate();
 
   const settingMood = () => {
     switch (moodImg) {
@@ -112,7 +103,11 @@ const ReviseDiary = () => {
     }
   };
 
-  const onChange = (e: any) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
     setReviseDiary({
       ...reviseDiary,

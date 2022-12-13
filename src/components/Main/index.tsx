@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./styles";
 import axios from "axios";
 import { getAccessToken } from "../../utils/Token";
+import { DiaryType } from "../../interface";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -58,7 +59,7 @@ const DiaryContainer = ({
   );
 };
 
-const WriteDiary = ({ Diary, mine }: { Diary: any; mine: boolean }) => {
+const WriteDiary = ({ Diary, mine }: { Diary: DiaryType; mine: boolean }) => {
   const previewText: string =
     Diary.content?.length < 80
       ? Diary.content

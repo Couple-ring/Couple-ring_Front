@@ -3,7 +3,7 @@ import { ImgIcon, NullImg } from "../../../assets";
 
 interface ModalPropsType {
   setIsImg: React.Dispatch<React.SetStateAction<boolean>>;
-  img: string;
+  img: string | null;
 }
 
 function TodayImg({ setIsImg, img }: ModalPropsType): JSX.Element {

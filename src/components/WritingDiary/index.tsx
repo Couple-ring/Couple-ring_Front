@@ -26,8 +26,8 @@ const WritingDiary = () => {
   const [isMoodModal, setIsMoodModal] = useState<boolean>(false);
   const [upLoadImg, setUpLoadImg] = useState<File | null>(null);
   const [preview, setPreview] = useState<any>(Test);
+  const [isImg, setIsImg] = useState(false);
   const fileInput = useRef<any>(null);
-  const [resImg, setResImg] = useState<any>();
   const [inputs, setInputs] = useState({
     title: "",
     content: "",
@@ -78,7 +78,11 @@ const WritingDiary = () => {
     return response.data.imageUrl;
   };
 
-  const onChange = (e: any) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,

@@ -55,7 +55,7 @@ function WatchingDiary(): JSX.Element {
           </S.Content>
         </S.Wrapper>
       </S.Container>
-      {isImg && <TodayImg setIsImg={setIsImg} img={diary.imageUrl}/>}
+      {isImg && <TodayImg setIsImg={setIsImg} img={diary.imageUrl} />}
     </>
   );
 }
